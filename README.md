@@ -1,5 +1,7 @@
 to run:
 
+have python, pip, npm, and all that stuff installed
+
 cd into server and run the python file
 
 
