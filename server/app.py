@@ -1,7 +1,9 @@
 import os
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # Import the CORS package
+from flask_cors import CORS 
 from collections import defaultdict
+
+# python3 -m flask run
 
 app = Flask(__name__)
 CORS(app)
@@ -51,19 +53,21 @@ def get_neighbours(i, j, board_size):
             if 0 <= next_i < board_size and 0 <= next_j < board_size:
                 yield next_i, next_j
             
-def traverse(grid, i, j, word, visited, solutions, node):
+def traverse(grid, i, j, word, visited, solutions, node, path):
     char = grid[i][j]
     word += char
     visited.add((i, j))
+    path.append((i, j))
     node = node.children[char]
 
     if node.is_end_of_word:
-        solutions.add(word)
+        solutions[word] = path.copy() # store if end
     
     for next_i, next_j in get_neighbours(i, j, len(grid)):
         if (next_i, next_j) not in visited and grid[next_i][next_j] in node.children:
-            traverse(grid, next_i, next_j, word, visited, solutions, node)
+            traverse(grid, next_i, next_j, word, visited, solutions, node, path)
     visited.remove((i, j))
+    path.pop()
 
 @app.route('/')
 def index():
@@ -74,13 +78,19 @@ def solve():
     data = request.json
     board = data['board']
     grid = [list(board[i:i+4]) for i in range(0, 16, 4)]
-    solutions = set()
+    solutions = {}
     for i in range(4):
         for j in range(4):
             if grid[i][j] in dictionary.root.children:
-                traverse(grid, i, j, "", set(), solutions, dictionary.root)
-    sorted_solutions = sorted(solutions, key=len, reverse=True)
-    return jsonify(list(sorted_solutions))  # Return the found words as a JSON response
+                traverse(grid, i, j, "", set(), solutions, dictionary.root, [])
+    
+    # Convert solutions to a list of dictionaries with 'word' and 'path' keys
+    sorted_solutions = [
+        {'word': word, 'path': path} 
+        for word, path in sorted(solutions.items(), key=lambda x: len(x[0]), reverse=True)
+    ]
+    
+    return jsonify(sorted_solutions)
 
 
 if __name__ == '__main__':
