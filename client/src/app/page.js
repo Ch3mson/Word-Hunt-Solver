@@ -1,12 +1,11 @@
 
+import Hero from '@/components/hero';
 import Grid from '../components/grid'
 
 export default function Home() {
   return (
     <>
-      <p>
-        hello world
-      </p>
+      <Hero />
       <Grid />
     </>
   );
