@@ -8,6 +8,7 @@ export default function Grid() {
     const [grid, setGrid] = useState(Array(4).fill().map(() => Array(4).fill('')));
     const [error, setError] = useState('');
     const [answers, setAnswers] = useState([]);
+    const [loading, setLoading] = useState(false);
     const inputRefs = useRef(Array(4).fill().map(() => Array(4)));
 
     const handleInputChange = (rowIndex, colIndex, value) => {
@@ -115,12 +116,14 @@ export default function Grid() {
 
         try {
             setError('');
+            setLoading(true);
             const response = await axios.post('http://127.0.0.1:5000/solve', { board });
             setAnswers(response.data);
-            console.log(response.data);
+            setLoading(false);
         } catch (error) {
             console.error('Error:', error);
             setError('An error occurred while submitting. Please try again.');
+            setLoading(false);
         }
     };
 
@@ -159,20 +162,26 @@ export default function Grid() {
 
         {error && <p className='text-red-400'>{error}</p>}
         
-        {answers.length > 0 && (
-            <div className="mt-8">
-                <h2 className="font-bold text-3xl text-center pb-8 animate-move-bg bg-gradient-to-r from-indigo-500 
-                    via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text
-                    text-transparent">Answers:
-                </h2>
-                <div className="flex justify-center w-full">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-center">
-                        {answers.map((answer, index) => (
-                            <Answer key={index} grid={grid} answer={answer} />
-                        ))}
+        {loading ? (
+            <div className="flex justify-center mt-8">
+                <p>Loading...</p>
+            </div>
+        ) : (
+            answers.length > 0 && (
+                <div className="mt-8">
+                    <h2 className="font-bold text-3xl text-center pb-8 animate-move-bg bg-gradient-to-r from-indigo-500 
+                        via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text
+                        text-transparent">Answers:
+                    </h2>
+                    <div className="flex justify-center w-full">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-center">
+                            {answers.map((answer, index) => (
+                                <Answer key={index} grid={grid} answer={answer} />
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )
         )}
         </>
     )
