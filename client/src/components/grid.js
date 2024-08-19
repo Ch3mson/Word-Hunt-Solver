@@ -114,7 +114,7 @@ export default function Grid() {
         }
 
         try {
-            setError(''); // Clear any existing error message
+            setError('');
             const response = await axios.post('http://127.0.0.1:5000/solve', { board });
             setAnswers(response.data);
             console.log(response.data);
@@ -149,35 +149,31 @@ export default function Grid() {
                 </tbody>
             </table>
 
-        <button
-        onClick={handleSubmit}
-        className="text-slate-100 bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:200%_200%] animate-gradient-move hover:from-indigo-600 hover:via-pink-600 hover:to-indigo-600 font-medium rounded-lg text-sm mt-2 px-5 py-2.5 text-center mb-2"
-        >
-        Solve
-        </button>
-
-
-
-
+            <button
+                onClick={handleSubmit}
+                className="text-slate-100 bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:200%_200%] animate-gradient-move hover:from-indigo-600 hover:via-pink-600 hover:to-indigo-600 font-medium rounded-lg text-sm mt-2 px-5 py-2.5 text-center mb-2"
+            >
+                Solve
+            </button>
         </div>
+
         {error && <p className='text-red-400'>{error}</p>}
         
         {answers.length > 0 && (
-        <div className="mt-8">
-            <h2 className="font-bold text-3xl text-center pb-8 animate-move-bg bg-gradient-to-r from-indigo-500 
-                via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text
-                text-transparent">Answers:
-            </h2>
-          <div className="flex justify-center w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-center">
-                {answers.map((answer, index) => (
-                <Answer key={index} grid={grid} answer={answer} />
-                ))}
+            <div className="mt-8">
+                <h2 className="font-bold text-3xl text-center pb-8 animate-move-bg bg-gradient-to-r from-indigo-500 
+                    via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text
+                    text-transparent">Answers:
+                </h2>
+                <div className="flex justify-center w-full">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-center">
+                        {answers.map((answer, index) => (
+                            <Answer key={index} grid={grid} answer={answer} />
+                        ))}
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-      )}
-
+        )}
         </>
     )
 }

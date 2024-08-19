@@ -19,7 +19,17 @@ export default function Hero() {
               </span>
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-500">
-              Created with a Flask backend and Next.js frotnend. Source code available here
+                Created with a Flask backend and Next.js frotnend. Source code available {" "}
+                <a className='underline hover:text-slate-300' href="https://github.com/Ch3mson/word-hunt-cheat">
+                    here 
+                </a>.
+                Press {" "}
+                <a className="animate-move-bg bg-gradient-to-r from-indigo-500 
+                via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text
+                text-transparent">
+                    Ctrl/Cmd + Backspace
+                </a>
+                 {" "}to clear the board
             </p>
             <div className="mx-auto flex w-full max-w-2xl flex-col justify-center gap-2 sm:flex-row">
             </div>
