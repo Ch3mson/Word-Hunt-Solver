@@ -40,8 +40,6 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [Algorithm](https://www.youtube.com/watch?v=H88R7XlGSDo)
 * [Website Theme](https://animated-fluent-emoji.vercel.app/)
 
