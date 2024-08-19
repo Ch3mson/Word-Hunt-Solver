@@ -20,7 +20,7 @@ export default function Hero() {
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-500">
                 Created with a Flask backend and Next.js frotnend. Source code available {" "}
-                <a className='underline hover:text-slate-300' href="https://github.com/Ch3mson/word-hunt-cheat">
+                <a className='underline hover:text-slate-300' href="https://github.com/Ch3mson/Word-Hunt-Solver">
                     here 
                 </a>.
                 Press {" "}
