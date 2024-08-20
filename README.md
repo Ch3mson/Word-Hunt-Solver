@@ -12,8 +12,6 @@ A word hunt solver created with Next.js and Flask. All computations are done wit
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Clone the repo
    ```sh
    git clone https://github.com/Ch3mson/Word-Hunt-Solver
@@ -39,8 +37,6 @@ _Below is an example of how you can instruct your audience on installing and set
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 * [Algorithm](https://www.youtube.com/watch?v=H88R7XlGSDo)
 * [Website Theme](https://animated-fluent-emoji.vercel.app/)
