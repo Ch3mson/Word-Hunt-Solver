@@ -117,7 +117,7 @@ export default function Grid() {
         try {
             setError('');
             setLoading(true);
-            const response = await axios.post('http://127.0.0.1:5000/solve', { board });
+            const response = await axios.post('https://word-hunt-solver-50fa65954701.herokuapp.com/solve', { board });
             setAnswers(response.data);
             setLoading(false);
         } catch (error) {
